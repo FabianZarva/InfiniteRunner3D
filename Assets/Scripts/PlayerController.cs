@@ -18,10 +18,13 @@ namespace EndlessRunner.Player
         [SerializeField] private float initialGravityValue = -9.81f;
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private LayerMask turnLayer;
+        [SerializeField] private LayerMask obstacleLayer;
         [SerializeField] private Animator animator;
         [SerializeField] private AnimationClip slideAnimationClip;
+        [SerializeField] private float playerSpeed;
+        [SerializeField] private float scoreMultiplier = 10f;
 
-        private float playerSpeed;
+
         private float gravity;
         private Vector3 movementDirection = Vector3.forward;
         private Vector3 playerVelocity;
@@ -36,8 +39,12 @@ namespace EndlessRunner.Player
         private int slidingAnimationId;
 
         private bool sliding = false;
+        private float score = 0;
+        
 
         [SerializeField] private UnityEvent<Vector3> turnEvent;
+        [SerializeField] private UnityEvent<int> gameOverEvent;
+        [SerializeField] private UnityEvent<int> scoreUpdateEvent;
 
         private void Awake()
         {
@@ -78,6 +85,7 @@ namespace EndlessRunner.Player
             Vector3? turnPosition = CheckTurn(context.ReadValue<float>());
             if (!turnPosition.HasValue)
             {
+                GameOver();
                 return;
             }
            Vector3 targetDirection =  Quaternion.AngleAxis(90 * context.ReadValue<float>(), Vector3.up) * 
@@ -152,6 +160,16 @@ namespace EndlessRunner.Player
 
         private void Update()
         {
+            if (!IsGrounded(20f))
+            {
+                GameOver();
+                return;
+            }
+
+            //Score functionality
+            score += scoreMultiplier * Time.deltaTime;
+            scoreUpdateEvent.Invoke((int)score);
+
             controller.Move(transform.forward * playerSpeed * Time.deltaTime);
 
             if (IsGrounded() && playerVelocity.y < 0)
@@ -183,5 +201,19 @@ namespace EndlessRunner.Player
             return false;
         }
 
+        private void GameOver()
+        {
+            Debug.Log("Game Over");
+            gameOverEvent.Invoke((int)score);
+            gameObject.SetActive(false);
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            if (((1 << hit.collider.gameObject.layer) & obstacleLayer) != 0)
+            {
+                GameOver(); 
+            }
+        }
     }
 }
