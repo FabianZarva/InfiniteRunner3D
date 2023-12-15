@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using LootLocker.Requests;
 
 namespace EndlessRunner.Player
 {
@@ -23,7 +24,7 @@ namespace EndlessRunner.Player
         [SerializeField] private AnimationClip slideAnimationClip;
         [SerializeField] private float playerSpeed;
         [SerializeField] private float scoreMultiplier = 10f;
-
+        [SerializeField] private GameObject mesh;
 
         private float gravity;
         private Vector3 movementDirection = Vector3.forward;
@@ -78,8 +79,10 @@ namespace EndlessRunner.Player
         {
             playerSpeed = initialPlayerSpeed;
             gravity = initialGravityValue;
+           
         }
 
+        
         private void PlayerTurn(InputAction.CallbackContext context)
         {
             Vector3? turnPosition = CheckTurn(context.ReadValue<float>());
@@ -143,7 +146,7 @@ namespace EndlessRunner.Player
             controller.center = newControllerCenter;
             // Sliding animation played            
             animator.Play(slidingAnimationId);
-            yield return new WaitForSeconds(slideAnimationClip. length);
+            yield return new WaitForSeconds(slideAnimationClip. length / animator.speed);
             // Character controller height goes back to normal after sliding
             controller.height *= 2;
             controller.center = originalControllerCenter;
@@ -179,6 +182,17 @@ namespace EndlessRunner.Player
 
             playerVelocity.y += gravity * Time.deltaTime;
             controller.Move(playerVelocity * Time.deltaTime);
+
+            if(playerSpeed < maximumPlayerSpeed)
+            {
+                playerSpeed += Time.deltaTime * playerSpeedIncreaseRate;
+                gravity = initialGravityValue - playerSpeed;
+
+                if(animator.speed < 1.25f)
+                {
+                    animator.speed += (1 / playerSpeed) * Time.deltaTime;
+                }
+            }
         }
 
         private bool IsGrounded(float length = 0.2f)

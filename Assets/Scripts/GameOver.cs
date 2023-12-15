@@ -5,10 +5,10 @@ using LootLocker.Requests;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+
 public class GameOver : MonoBehaviour
 {
 
-    [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private TextMeshProUGUI leaderboardScoreText;
@@ -19,14 +19,14 @@ public class GameOver : MonoBehaviour
     private int leaderboardTopCount = 10;
 
     public void StopGame(int score)
-    {        
-        gameOverCanvas.SetActive(true);
+    {     
         this.score = score;
         scoreText.text = score.ToString();
-        SubmitScore();
+        GetLeaderboard();
+        AddXP(score);
 
     }
-        
+    
     public void SubmitScore()
     {
         StartCoroutine(SubmitScoreToLeaderboard());
@@ -50,7 +50,7 @@ public class GameOver : MonoBehaviour
         
         });
         yield return new WaitUntil(() => nameSet.HasValue);
-        if (!nameSet.Value) yield break;
+        //if (!nameSet.Value) yield break;
         bool? scoreSubmitted = null;
         LootLockerSDKManager.SubmitScore("", score, leaderboardID.ToString(), (response) =>
         {
@@ -108,7 +108,17 @@ public class GameOver : MonoBehaviour
 
     public void AddXP(int score)
     {
-
+        LootLockerSDKManager.SubmitXp(score, (response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("Successfully added XP.");
+            }
+            else
+            {
+                Debug.Log("Failed adding XP.");
+            }
+        });
     }
 
     public void ReloadScene()

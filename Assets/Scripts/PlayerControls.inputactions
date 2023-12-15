@@ -16,12 +16,12 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "69f4e1b5-f07c-430a-ba36-190261654a9f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Slide",
@@ -103,7 +103,7 @@
                 {
                     "name": "negative",
                     "id": "c9c0f1a9-f792-46db-8f64-4e8236bfc8cb",
-                    "path": "<Keyboard>/leftArrow",
+                    "path": "<Touchscreen>/delta/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -114,7 +114,7 @@
                 {
                     "name": "positive",
                     "id": "b12c7c1b-2403-406c-8ee5-7944421e608a",
-                    "path": "<Keyboard>/rightArrow",
+                    "path": "<Touchscreen>/delta/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
