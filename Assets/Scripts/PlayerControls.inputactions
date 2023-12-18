@@ -103,7 +103,7 @@
                 {
                     "name": "negative",
                     "id": "c9c0f1a9-f792-46db-8f64-4e8236bfc8cb",
-                    "path": "<Touchscreen>/delta/left",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -114,7 +114,7 @@
                 {
                     "name": "positive",
                     "id": "b12c7c1b-2403-406c-8ee5-7944421e608a",
-                    "path": "<Touchscreen>/delta/right",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

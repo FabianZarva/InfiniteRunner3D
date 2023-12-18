@@ -444,8 +444,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeefb0faf08d93547b9ef3e73cc1d376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollViewContentTransform: {fileID: 0}
-  prefab: {fileID: 2514874873077104447, guid: 749cd960487d27541bfe38e691a28383, type: 3}
 --- !u!1 &581775250
 GameObject:
   m_ObjectHideFlags: 0
