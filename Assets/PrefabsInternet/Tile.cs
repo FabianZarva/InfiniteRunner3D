@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace EndlessRunner {
+namespace InfiniteRunner3D {
 
 public enum TileType {
     STRAIGHT,

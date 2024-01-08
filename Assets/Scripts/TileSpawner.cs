@@ -1,10 +1,8 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EndlessRunner{
-
-
+namespace InfiniteRunner3D
+{
     public class TileSpawner : MonoBehaviour
     {
         [SerializeField] private int tileStartCount = 10;
@@ -23,34 +21,38 @@ namespace EndlessRunner{
 
         private void Start()
         {
+            // Initializes the lists of tiles and obstacles and randomizes their appearance
             currentTiles = new List<GameObject>();
             currentObstacles = new List<GameObject>();
-
             Random.InitState(System.DateTime.Now.Millisecond);
 
+            // Spawns initial tiles, which are MANDATORY to be STRAIGHT
             for (int i = 0; i < tileStartCount; i++)
             {
                 SpawnTile(startingTile.GetComponent<Tile>());
             }
 
+            // Spawns a MANDATORY TURNING tile after the initial MANDATORY STRAIGHT tiles
             SpawnTile(SelectRandomGameObjectFromList(turningTiles).GetComponent<Tile>());
-            
         }
 
+        // Spawning new tiles, one by one
         private void SpawnTile(Tile tile, bool spawnObstacle = false)
         {
-            Quaternion newTileRotation = tile.gameObject.transform.rotation * Quaternion.LookRotation
-                (currentTileDirection, Vector3.up);
+            Quaternion newTileRotation = tile.gameObject.transform.rotation * Quaternion.LookRotation(currentTileDirection, Vector3.up);
             previousTile = GameObject.Instantiate(tile.gameObject, currentTileLocation, newTileRotation);
             currentTiles.Add(previousTile);
 
-            if (spawnObstacle) SpawnObstacle();
+            // If it is specified in the editor for obstacles to be spawned, the script does so
+            if (spawnObstacle) 
+                SpawnObstacle();
 
-
-                if(tile.type == TileType.STRAIGHT)
-            currentTileLocation += Vector3.Scale(previousTile.GetComponent<Renderer>().bounds.size, currentTileDirection);
+            // Based on its type, adjusts the next tile's location
+            if (tile.type == TileType.STRAIGHT)
+                currentTileLocation += Vector3.Scale(previousTile.GetComponent<Renderer>().bounds.size, currentTileDirection);
         }
 
+        // Deletes previous tiles and obstacles after passing them and changing direction
         private void DeletePreviousTiles()
         {
             while (currentTiles.Count != 1)
@@ -65,55 +67,51 @@ namespace EndlessRunner{
                 currentObstacles.RemoveAt(0);
                 Destroy(obstacle);
             }
-
         }
 
+        // Adding a new direction and spawning tiles based on the direction the player is now facing
         public void AddNewDirection(Vector3 direction)
         {
+            // Updates the new tile's direction and deletes the previous tiles (which were in the previous direction)
             currentTileDirection = direction;
             DeletePreviousTiles();
 
+            // Sets the location for placing the next tile
             Vector3 tilePlacementScale;
             if (previousTile.GetComponent<Tile>().type == TileType.SIDEWAYS)
-            {
                 tilePlacementScale = Vector3.Scale(previousTile.GetComponent<Renderer>().bounds.size / 2 + (Vector3.one * startingTile.GetComponent<BoxCollider>().size.z / 2), currentTileDirection);
-            }
             else
-            {
                 tilePlacementScale = Vector3.Scale((previousTile.GetComponent<Renderer>().bounds.size - (Vector3.one * 2)) + (Vector3.one * startingTile.GetComponent<BoxCollider>().size.z / 2), currentTileDirection);
-            }
 
             currentTileLocation += tilePlacementScale;
 
+            // Spawning tiles in a straight line
             int currentPathLength = Random.Range(minimumStraightTiles, maximumStraightTiles);
-            for(int i = 0; i < currentPathLength; i++)
+            for (int i = 0; i < currentPathLength; i++)
             {
                 SpawnTile(startingTile.GetComponent<Tile>(), (i == 0) ? false : true);
-
             }
 
+            // Spawning a turning tile(left or right with a pivot)
             SpawnTile(SelectRandomGameObjectFromList(turningTiles).GetComponent<Tile>(), false);
         }
 
+        // Randomly spawning obstacles along the game sessions (that need to be jumped or slid under)
         private void SpawnObstacle()
         {
             if (Random.value > 0.4f) return;
 
             GameObject obstaclePrefab = SelectRandomGameObjectFromList(obstacles);
-            Quaternion newObjectRotation = obstaclePrefab.gameObject.transform.rotation * Quaternion.LookRotation
-                (currentTileDirection, Vector3.up);
+            Quaternion newObjectRotation = obstaclePrefab.gameObject.transform.rotation * Quaternion.LookRotation(currentTileDirection, Vector3.up);
             GameObject obstacle = Instantiate(obstaclePrefab, currentTileLocation, newObjectRotation);
             currentObstacles.Add(obstacle);
         }
 
+        // A random GameObject from the list is selected
         private GameObject SelectRandomGameObjectFromList(List<GameObject> list)
         {
             if (list.Count == 0) return null;
             return list[Random.Range(0, list.Count)];
         }
-        
-
-
-
     }
 }
