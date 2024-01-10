@@ -99,7 +99,7 @@ namespace InfiniteRunner3D
         // Randomly spawning obstacles along the game sessions (that need to be jumped or slid under)
         private void SpawnObstacle()
         {
-            if (Random.value > 0.4f) return;
+            if (Random.value > 1f) return;
 
             GameObject obstaclePrefab = SelectRandomGameObjectFromList(obstacles);
             Quaternion newObjectRotation = obstaclePrefab.gameObject.transform.rotation * Quaternion.LookRotation(currentTileDirection, Vector3.up);
