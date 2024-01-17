@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1221596673278510651}
   - component: {fileID: 881199818582450653}
   - component: {fileID: 9016121079718167196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wallR (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 595954748602166563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.8463, y: 0.5668, z: -6.9107}
-  m_LocalScale: {x: 0.31381953, y: 0.81376, z: 10.243571}
+  m_LocalPosition: {x: -1.8385, y: 0.5668, z: -5.174}
+  m_LocalScale: {x: 0.2982227, y: 0.81376, z: 13.717166}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1886248315279132885}

@@ -267,13 +267,7 @@ namespace InfiniteRunner3D.Player
         // Update is called once per frame
         private void Update()
         {
-            // If the player is not grounded, the game is over
-            if (!IsGrounded(20f))
-            {
-                GameOver();
-                return;
-            }
-
+            
             // Game's scoring functionality
             score += scoreMultiplier * Time.deltaTime;
             scoreUpdateEvent.Invoke((int)score);
