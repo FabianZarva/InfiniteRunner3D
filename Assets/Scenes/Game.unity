@@ -1791,6 +1791,10 @@ MonoBehaviour:
   obstacles:
   - {fileID: 1887772381221813489, guid: 7acef6c3f1b5d6f45b162045d394132f, type: 3}
   - {fileID: 7602181854675208719, guid: 155f450bb33de2c4f96d377dba80b194, type: 3}
+  powerUpPrefabs:
+  - {fileID: 9200029897695539600, guid: cf320289a5bbd2f4aaad225b917be088, type: 3}
+  - {fileID: 1216771491243461571, guid: 7d82e67c382de824da30e9344bc16bd9, type: 3}
+  powerUpSpawnChance: 0.1
 --- !u!4 &1290910056
 Transform:
   m_ObjectHideFlags: 0
@@ -2263,7 +2267,7 @@ GameObject:
   - component: {fileID: 1477026159}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

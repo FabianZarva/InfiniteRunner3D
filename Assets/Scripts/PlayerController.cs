@@ -65,6 +65,7 @@ namespace InfiniteRunner3D.Player
             slideAction = playerInput.actions["Slide"];
         }
 
+
         // This is called when the script is enabled
         private void OnEnable()
         {
@@ -300,6 +301,34 @@ namespace InfiniteRunner3D.Player
             // Handles swiping input
             HandleSwipeInput();
         }
+         
+         // when the powerup is collected, the current player speed is increased for a limited amount of time (before reset).
+        public void IncreaseSpeed(float value, float duration)
+        {
+            playerSpeed += value;
+            StartCoroutine(ResetSpeedAfterDuration(value,duration));
+        }
+         // when the powerup is collected, the current player jump force is increased for a limited amount of time (before reset).
+        public void IncreaseJump(float value, float duration)
+        {
+            jumpHeight += value;
+            StartCoroutine(ResetJumpAfterDuration(value,duration));
+        }
+
+        // When the powerup duration is finished, there is a coroutine to decrease the speed with the same value as the powerup's
+        private IEnumerator ResetSpeedAfterDuration(float value, float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            playerSpeed-= value;
+        }
+
+        // When the powerup duration is finished, there is a coroutine to decrease the jump force with the same value as the powerup's
+        private IEnumerator ResetJumpAfterDuration(float value, float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            jumpHeight-= value;
+        }
+
 
         // Checks if the player is grounded within 0.2 units
         private bool IsGrounded(float length = 0.2f)

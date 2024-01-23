@@ -19,6 +19,9 @@ namespace InfiniteRunner3D
         private List<GameObject> currentTiles;
         private List<GameObject> currentObstacles;
 
+         [SerializeField] private List<GameObject> powerUpPrefabs;
+         [SerializeField] private float powerUpSpawnChance = 0.2f;
+
         private void Start()
         {
             // Initializes the lists of tiles and obstacles and randomizes their appearance
@@ -43,6 +46,11 @@ namespace InfiniteRunner3D
             previousTile = GameObject.Instantiate(tile.gameObject, currentTileLocation, newTileRotation);
             currentTiles.Add(previousTile);
 
+             if (Random.value < powerUpSpawnChance)
+            {
+                SpawnPowerUp();
+            }
+
             // If it is specified in the editor for obstacles to be spawned, the script does so
             if (spawnObstacle) 
                 SpawnObstacle();
@@ -51,6 +59,23 @@ namespace InfiniteRunner3D
             if (tile.type == TileType.STRAIGHT)
                 currentTileLocation += Vector3.Scale(previousTile.GetComponent<Renderer>().bounds.size, currentTileDirection);
         }
+
+         private void SpawnPowerUp()
+        {
+          //spawns random power-up from list
+
+          GameObject powerUpPrefab = SelectRandomGameObjectFromList(powerUpPrefabs);
+         // if a powerup exists in the scene, it should be spawned 1 unit higher than its default spawn position ( i added this because with y=0 the cubes were stuck in the ground)
+        if (powerUpPrefab != null)
+         {
+        Vector3 spawnPosition = currentTileLocation;
+        spawnPosition.y += 1.0f; 
+
+        Quaternion powerUpRotation = powerUpPrefab.gameObject.transform.rotation * Quaternion.LookRotation(currentTileDirection, Vector3.up);
+        Instantiate(powerUpPrefab, spawnPosition, powerUpRotation);
+         }
+        }
+
 
         // Deletes previous tiles and obstacles after passing them and changing direction
         private void DeletePreviousTiles()
