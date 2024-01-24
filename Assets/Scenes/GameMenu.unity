@@ -600,7 +600,8 @@ MonoBehaviour:
   m_text: "                                  Controls:\n\n\n   W (Computer) or Swipe
     Up(Mobile) - Jump\n   S (Computer) or Swipe Down(Mobile) - Slide\n   A (Computer)
     or Swipe Left(Mobile) - Left turn\n   D (Computer) or Swipe Right(Mobile) - Right
-    turn\n"
+    turn\n    \n                                 Powerups:\n\n\n   Green Cube - Double
+    Jump forrce for 10 sec\n   Red Cube - Adds 5 units to speed for 10 sec\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
