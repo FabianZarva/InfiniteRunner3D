@@ -460,10 +460,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "                              Instructions:\n \n - Set a high score!\n-
-    Straight movement is automatic, but you need to turn left and right on intersections
-    by yourself!!\n- Don't turn in a straight line.\n- Avoid diverse obstacles by
-    jumping over or/and sliding under them!\n\n\n\n   "
+  m_text: "                              Instructions:\n \n - Set a high score!\n
+    - Straight movement is automatic, but you need to turn left and right on intersections
+    by yourself!!\n - Don't turn in a straight line.\n - Avoid diverse obstacles
+    by jumping over or/and sliding under them!\n\n\n\n   "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -597,11 +597,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "                                  Controls:\n\n\n   W (Computer) or Swipe
-    Up(Mobile) - Jump\n   S (Computer) or Swipe Down(Mobile) - Slide\n   A (Computer)
-    or Swipe Left(Mobile) - Left turn\n   D (Computer) or Swipe Right(Mobile) - Right
-    turn\n    \n                                 Powerups:\n\n\n   Green Cube - Double
-    Jump forrce for 10 sec\n   Red Cube - Adds 5 units to speed for 10 sec\n\n\n"
+  m_text: "                                  Controls:\n\n\n   SpaceBar (Computer)
+    or Swipe Up(Mobile) - Jump\n   S (Computer) or Swipe Down(Mobile) - Slide\n  
+    A (Computer) or Swipe Left(Mobile) - Left turn\n   D (Computer) or Swipe Right(Mobile)
+    - Right turn\n    \n                                 Powerups:\n\n\n   Green
+    Cube - Double Jump forrce for 10 sec\n   Red Cube - Adds 5 units to speed for
+    10 sec\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -628,8 +629,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46
-  m_fontSizeBase: 46
+  m_fontSize: 43
+  m_fontSizeBase: 43
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -921,7 +922,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Inifinte Run 3D
+  m_text: Inifinte Runner 3D
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -948,8 +949,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.1
-  m_fontSizeBase: 30.1
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
